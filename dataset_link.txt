@@ -1,1 +1,1 @@
-https://www.kaggle.com/datasets/berkayalan/retail-sales-data
+https://www.kaggle.com/competitions/store-sales-time-series-forecasting
