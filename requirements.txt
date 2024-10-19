@@ -1,0 +1,9 @@
+streamlit
+streamlit-option-menu
+streamlit-extras
+pandas
+xgboost
+scikit-learn
+mlflow
+Pillow
+plotly
