@@ -86,9 +86,9 @@ Then open http://localhost:5000
 Built as a team project at the **Digital Egypt Pioneers Initiative (DEPI)**:
 
 - [Emad Mostafa](https://github.com/3madMostafa)
-- [Abdelrahman Zahran](https://github.com/AbdoZahran)
+- [Abdelrahman Zahran](https://github.com/AbdoZahran59)
 - [Omar Sahwan](https://github.com/OmarSahwan)
-- [heka2002](https://github.com/heka2002)
+- [Ebrahem Osama](https://github.com/EbrahemOsama22)
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2c5364,50:203a43,100:0f2027&height=100&section=footer" width="100%"/>
