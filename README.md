@@ -1,74 +1,95 @@
-# Store Sales - Time Series Forecasting
-###  Use machine learning to predict grocery sales
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=180&section=header&text=Retail%20Sales%20Forecasting&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Predict%20daily%20store%20sales%20with%20machine%20learning&descAlignY=60&descSize=18" width="100%"/>
+</p>
 
-[Go to page ....](https://www.kaggle.com/c/store-sales-time-series-forecasting/overview)
-# Description
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1000&color=36BCF7&center=true&vCenter=true&width=600&lines=54+stores+%C2%B7+33+product+families;ARIMA+%C2%B7+Prophet+%C2%B7+XGBoost+%C2%B7+LSTM;Tracked+with+MLflow;Live+Streamlit+dashboard" alt="Typing SVG"/>
+</p>
 
-###Goal of the Competition
-In this “getting started” competition, you’ll use time-series forecasting to forecast store sales on data from Corporación Favorita, a large Ecuadorian-based grocery retailer.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/XGBoost-EC6B23?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white"/>
+</p>
 
-Specifically, you'll build a model that more accurately predicts the unit sales for thousands of items sold at different Favorita stores. You'll practice your machine learning skills with an approachable training dataset of dates, store, and item information, promotions, and unit sales.
-### Context
-Forecasts aren’t just for meteorologists. Governments forecast economic growth. Scientists attempt to predict the future population. And businesses forecast product demand—a common task of professional data scientists. Forecasts are especially relevant to brick-and-mortar grocery stores, which must dance delicately with how much inventory to buy. Predict a little over, and grocers are stuck with overstocked, perishable goods. Guess a little under, and popular items quickly sell out, leading to lost revenue and upset customers. More accurate forecasting, thanks to machine learning, could help ensure retailers please customers by having just enough of the right products at the right time.
+## What is this?
 
-Current subjective forecasting methods for retail have little data to back them up and are unlikely to be automated. The problem becomes even more complex as retailers add new locations with unique needs, new products, ever-transitioning seasonal tastes, and unpredictable product marketing.
+A supermarket chain needs to know **how much it will sell** to order the right amount of stock.
 
-### Potential Impact
-If successful, you'll have flexed some new skills in a real world example. For grocery stores, more accurate forecasting can decrease food waste related to overstocking and improve customer satisfaction. The results of this ongoing competition, over time, might even ensure your local store has exactly what you need the next time you shop.
-# Evaluation
-The evaluation metric for this competition is Root Mean Squared Logarithmic Error.
+We used the data of **Corporación Favorita**, a big grocery chain in Ecuador, from the [Kaggle Store Sales competition](https://www.kaggle.com/c/store-sales-time-series-forecasting). We trained several models to predict **daily sales** for each store and product family.
 
-The RMSLE is calculated as:
+## How it works
 
-1𝑛∑𝑖=1𝑛(log(1+𝑦̂ 𝑖)−log(1+𝑦𝑖))2‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾⎷
-
-where:
-
-- 𝑛 is the total number of instances,
-- 𝑦̂ 𝑖 is the predicted value of the target for instance 𝑖,
-- 𝑦𝑖 is the actual value of the target for instance 𝑖, and,
-- log is the natural logarithm.
-### Submission File
-For each id in the test set, you must predict a value for the sales variable. The file should contain a header and have the following format:
-
-```
-id,sales
-3000888,0.0
-3000889,0.0
-3000890,0.0
-3000891,0.0
-3000892,0.0
-etc.
+```mermaid
+flowchart LR
+    A[Raw sales data] --> B[Clean + add features<br/>date, holidays, promotions, oil price]
+    B --> C[EDA]
+    C --> D[Train models<br/>ARIMA · Prophet · XGBoost · LSTM]
+    D --> E[MLflow tracking]
+    E --> F[Best model → Streamlit app]
 ```
 
-# Data
-## File Descriptions and Data Field Information
+## Models we tried
 
-##### train.csv
-- The training data, comprising time series of features store_nbr, family, and onpromotion as well as the target sales.
-- store_nbr identifies the store at which the products are sold.
-- family identifies the type of product sold.
-- sales gives the total sales for a product family at a particular store at a given date. Fractional values are possible since products can be sold in fractional units (1.5 kg of cheese, for instance, as opposed to 1 bag of chips).
-- onpromotion gives the total number of items in a product family that were being promoted at a store at a given date.
+| Model | Notebook |
+|-------|----------|
+| ARIMA + Prophet | `models/Arima&prophet_model.ipynb` |
+| XGBoost ✅ used in the app | `models/XGboost_model.ipynb` |
+| LSTM | `models/lstm-model (1).ipynb` |
+| K-Means (store clusters) | `models/K-MeansModel.ipynb` |
 
-##### test.csv
-- The test data, having the same features as the training data. You will predict the target sales for the dates in this file.
-- The dates in the test data are for the 15 days after the last date in the training data.
+## The app
 
-##### sample_submission.csv
-- A sample submission file in the correct format.
+The Streamlit app has 5 pages:
 
-##### stores.csv
-- Store metadata, including city, state, type, and cluster.
-- cluster is a grouping of similar stores.
+| Page | What you can do |
+|------|-----------------|
+| 🏠 **Home** | Project overview |
+| 🔎 **Data Filtering** | Search and filter the data |
+| 📊 **Data Analysis** | Interactive charts: sales by month, day, promotions and transactions |
+| 🔮 **Data Prediction** | Pick a store, date and cluster and get the predicted sales from XGBoost |
+| 🧪 **MLflow** | Train the model again and log the run in MLflow |
 
-##### oil.csv
-- Daily oil price. Includes values during both the train and test data timeframes. (Ecuador is an oil-dependent country and it's economical health is highly vulnerable to shocks in oil prices.)
+## How to run
 
-##### holidays_events.csv
-- Holidays and Events, with metadata
-- NOTE: Pay special attention to the transferred column. A holiday that is transferred officially falls on that calendar day, but was moved to another date by the government. A transferred day is more like a normal day than a holiday. To find the day that it was actually celebrated, look for the corresponding row where type is Transfer. For example, the holiday Independencia de Guayaquil was transferred from 2012-10-09 to 2012-10-12, which means it was celebrated on 2012-10-12. Days that are type Bridge are extra days that are added to a holiday (e.g., to extend the break across a long weekend). These are frequently made up by the type Work Day which is a day not normally scheduled for work (e.g., Saturday) that is meant to payback the Bridge.
-- Additional holidays are days added a regular calendar holiday, for example, as typically happens around Christmas (making Christmas Eve a holiday).
-##### Additional Notes
-- Wages in the public sector are paid every two weeks on the 15 th and on the last day of the month. Supermarket sales could be affected by this.
-- A magnitude 7.8 earthquake struck Ecuador on April 16, 2016. People rallied in relief efforts donating water and other first need products which greatly affected supermarket sales for several weeks after the earthquake.
+```bash
+pip install -r requirements.txt
+streamlit run main.py
+```
+
+To see the MLflow runs:
+
+```bash
+mlflow ui
+```
+
+Then open http://localhost:5000
+
+## Files
+
+```
+├── main.py              # app menu
+├── Home.py              # home page
+├── Filtering.py         # data filtering page
+├── Analysis.py          # charts page
+├── Prediction.py        # prediction page (XGBoost)
+├── ML_Flow.py           # MLflow training page
+├── models/              # notebooks for each model
+├── new_model (1).pkl    # trained XGBoost model
+└── subset_data.csv      # sample data for the app
+```
+
+## Team
+
+Built as a team project at the **Digital Egypt Pioneers Initiative (DEPI)**:
+
+- [Emad Mostafa](https://github.com/3madMostafa)
+- [Abdelrahman Zahran](https://github.com/AbdoZahran)
+- [Omar Sahwan](https://github.com/OmarSahwan)
+- [heka2002](https://github.com/heka2002)
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2c5364,50:203a43,100:0f2027&height=100&section=footer" width="100%"/>
+</p>
